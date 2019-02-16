@@ -105,7 +105,8 @@
         <%=AuthenticationEndpointUtil.i18n(resourceBundle, "unauthorized.to.login")%>
     </div>
     <%}%>
-
+    <div style="font-size: 14px; color: dimgray;">
+	Se non hai ancora SPID, che presto diventer&agrave; obbligatorio, puoi accedere al DMS e a SPOT con le tue credenziali<br/></div>
     <% if (!isIdentifierFirstLogin(inputType)) { %>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
         <label for="username"><%=AuthenticationEndpointUtil.i18n(resourceBundle, "username")%></label>
@@ -129,37 +130,12 @@
     <%
         }
     %>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" id="chkRemember" name="chkRemember">
-                <%=AuthenticationEndpointUtil.i18n(resourceBundle, "remember.me")%>
-            </label>
-        </div>
-    </div>
+
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <input type="hidden" name="sessionDataKey" value='<%=Encode.forHtmlAttribute
             (request.getParameter("sessionDataKey"))%>'/>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-double">
-        <div class="alert alert-warning margin-bottom-3 padding-10" role="alert">
-            <div>
-                <%=AuthenticationEndpointUtil.i18n(resourceBundle, "privacy.policy.cookies.short.description")%>
-                <a href="cookie_policy.do" target="policy-pane">
-                    <%=AuthenticationEndpointUtil.i18n(resourceBundle, "privacy.policy.cookies")%>
-                </a>
-                <%=AuthenticationEndpointUtil.i18n(resourceBundle, "privacy.policy.for.more.details")%>
-            </div>
-        </div>
-        <div class="alert alert-warning margin-none padding-10" role="alert">
-            <div>
-                <%=AuthenticationEndpointUtil.i18n(resourceBundle, "privacy.policy.privacy.short.description")%>
-                <a href="privacy_policy.do" target="policy-pane">
-                    <%=AuthenticationEndpointUtil.i18n(resourceBundle, "privacy.policy.general")%>
-                </a>
-            </div>
-        </div>
-    </div>
+
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
         <div class="form-actions">
             <button
@@ -204,33 +180,12 @@
 
                 if (isRecoveryEPAvailable) {
         %>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-            <div class="form-actions">
-                <%=AuthenticationEndpointUtil.i18n(resourceBundle, "forgot.username.password")%>
-                <% if (!isIdentifierFirstLogin(inputType)) { %>
-                    <a id="usernameRecoverLink" href="<%=getRecoverUsernameUrl(identityMgtEndpointContext, urlEncodedURL)%>">
-                        <%=AuthenticationEndpointUtil.i18n(resourceBundle, "forgot.username")%>
-                    </a>
-                    <%=AuthenticationEndpointUtil.i18n(resourceBundle, "forgot.username.password.or")%>
-                <% } %>
-                <a id="passwordRecoverLink" href="<%=getRecoverPasswordUrl(identityMgtEndpointContext, urlEncodedURL)%>">
-                    <%=AuthenticationEndpointUtil.i18n(resourceBundle, "forgot.password")%>
-                </a>
-                ?
-            </div>
-        </div>
+
         <%
                 }
                 if (isSelfSignUpEPAvailable && !isIdentifierFirstLogin(inputType)) {
         %>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-            <div class="form-actions">
-            <%=AuthenticationEndpointUtil.i18n(resourceBundle, "no.account")%>
-            <a id="registerLink" href="<%=getRegistrationUrl(identityMgtEndpointContext, urlEncodedURL)%>">
-                <%=AuthenticationEndpointUtil.i18n(resourceBundle, "register.now")%>
-            </a>
-            </div>
-        </div>
+
         <%
                 }
             }

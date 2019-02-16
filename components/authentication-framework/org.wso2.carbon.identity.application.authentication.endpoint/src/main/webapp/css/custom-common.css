@@ -1,12 +1,17 @@
+@font-face {
+    font-family: "Fedra";
+    src: url("FedraSansStd-Medium.woff") format('woff');
+}
+
 body {
     background: #f9f9f9;
-    font-family: 'Roboto Light', Arial, Helvetica, sans-serif;
+    font-family: 'Fedra';
     font-weight: 300;
     min-height: 100%;
     position: relative;
 }
 header {
-    background: #222222;
+    background: #0075bf;
     min-height: 50px;
     position: relative;
 }
@@ -37,7 +42,7 @@ footer {
     min-height: 40px;
     overflow: hidden;
     color: #cbcbcb;
-    background: #222222;
+    background: #0075bf;
 }
 footer > .container, footer > .container-fluid {
     padding-right: 15px;
@@ -66,7 +71,7 @@ footer a, footer a:hover {
     color: #FFF;
 }
 .blue-bg {
-    background-color: #3a9ecf !important;
+    background-color: #0075bf !important;
 }
 .uppercase {
     text-transform: uppercase;
@@ -114,7 +119,7 @@ button.grey-bg:hover {
     background-color: #6b94f1;
 }
 button.grey-bg {
-    background-color: #222222;
+    background-color: #0075bf;
 }
 button.font-extra-large {
     font-size: 20px;

@@ -121,7 +121,8 @@
         <link href="libs/bootstrap_3.3.5/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/Roboto.css" rel="stylesheet">
         <link href="css/custom-common.css" rel="stylesheet">
-
+		<link type="text/css" rel="stylesheet" href="css/spid-sp-access-button.min.css" />
+		
         <!--[if lt IE 9]>
         <script src="js/html5shiv.min.js"></script>
         <script src="js/respond.min.js"></script>
@@ -173,9 +174,7 @@
         <div class="container-fluid">
             <div class="pull-left brand float-remove-xs text-center-xs">
                 <a href="#">
-                    <img src="images/logo-inverse.svg" alt="wso2" title="wso2" class="logo">
-
-                    <h1><em><%=AuthenticationEndpointUtil.i18n(resourceBundle, "identity.server")%></em></h1>
+                    <h1><em>Puglia DMS - Login</em></h1>
                 </a>
             </div>
         </div>
@@ -264,8 +263,60 @@
                             %>
                             <div class="form-group">
                                 <% if (hasLocalLoginOptions) { %>
-                                <label class="font-large"><%=AuthenticationEndpointUtil.i18n(resourceBundle,
-                                        "other.login.options")%>:</label>
+<!-- SPID -->   
+<div style="width:100%">
+<form name="spid_idp_access"  id="spid_idp_access" action="#" method="post" >
+        <a href="#" class="italia-it-button italia-it-button-size-l button-spid" spid-idp-button="#spid-idp-button-large-post" aria-haspopup="true" aria-expanded="false">
+            <span class="italia-it-button-icon"><img src="images/spid/spid-ico-circle-bb.svg" onerror="this.src='images/spid/spid-ico-circle-bb.png'; this.onerror=null;" alt="" /></span>
+            <span class="italia-it-button-text">Entra con SPID</span>
+        </a>
+        <div id="spid-idp-button-large-post" class="spid-idp-button spid-idp-button-tip spid-idp-button-relative">
+            <ul id="spid-idp-list-large-root-post" class="spid-idp-button-menu" aria-labelledby="spid-idp">
+                <li class="spid-idp-button-link" data-idp="arubaid">
+                    <button class="idp-button-idp-logo" name="aruba_id" type="submit"><span class="spid-sr-only">Aruba ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-arubaid.svg" onerror="this.src='images/spid/spid-idp-arubaid.png'; this.onerror=null;" alt="Aruba ID" /></button>
+                </li>
+                <li class="spid-idp-button-link" data-idp="infocertid">
+                    <button class="idp-button-idp-logo" name="agid-idp" type="submit"><span class="spid-sr-only">Infocert ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-infocertid.svg" onerror="this.src='images/spid/spid-idp-infocertid.png'; this.onerror=null;" alt="Infocert ID" /></button>
+                </li>
+                <li class="spid-idp-button-link" data-idp="intesaid">
+                    <button class="idp-button-idp-logo" name="intesa_id" type="submit"><span class="spid-sr-only">Intesa ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-intesaid.svg" onerror="this.src='images/spid/spid-idp-intesaid.png'; this.onerror=null;" alt="Intesa ID" /></button>
+                </li>
+                <li class="spid-idp-button-link" data-idp="lepidaid">
+                    <button class="idp-button-idp-logo" name="lepida_id" type="submit"><span class="spid-sr-only">Lepida ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-lepidaid.svg" onerror="this.src='images/spid/spid-idp-lepidaid.png'; this.onerror=null;" alt="Lepida ID" /></button>
+                </li>
+                <li class="spid-idp-button-link" data-idp="namirialid">
+                    <button class="idp-button-idp-logo" name="namirial_id" type="submit"><span class="spid-sr-only">Namirial ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-namirialid.svg" onerror="this.src='images/spid/spid-idp-namirialid.png'; this.onerror=null;" alt="Namirial ID" /></button>
+                </li>
+                <li class="spid-idp-button-link" data-idp="posteid">
+                    <button class="idp-button-idp-logo" name="poste_id" type="submit"><span class="spid-sr-only">Poste ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-posteid.svg" onerror="this.src='images/spid/spid-idp-posteid.png'; this.onerror=null;" alt="Poste ID" /></button>
+                </li>
+                <li class="spid-idp-button-link" data-idp="sielteid">
+                    <button class="idp-button-idp-logo" name="sielte_id" type="submit"><span class="spid-sr-only">Sielte ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-sielteid.svg" onerror="this.src='images/spid/spid-idp-sielteid.png'; this.onerror=null;" alt="Sielte ID" /></button>
+                </li>
+                <li class="spid-idp-button-link" data-idp="spiditalia">
+                    <button class="idp-button-idp-logo" name="spiditalia_id" type="submit"><span class="spid-sr-only">SPIDItalia Register.it</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-spiditalia.svg" onerror="this.src='images/spid/spid-idp-spiditalia.png'; this.onerror=null;" alt="SpidItalia" /></button>
+                </li>
+                <li class="spid-idp-button-link" data-idp="timid">
+                    <button class="idp-button-idp-logo" name="tim_id" type="submit"><span class="spid-sr-only">Tim ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-timid.svg" onerror="this.src='images/spid/spid-idp-timid.png'; this.onerror=null;" alt="Tim ID" /></button>
+                </li>
+                <li class="spid-idp-support-link" data-spidlink="info">
+                    <a href="https://www.spid.gov.it">Maggiori informazioni</a>
+                </li>
+                <li class="spid-idp-support-link" data-spidlink="rich">
+                    <a href="https://www.spid.gov.it/richiedi-spid">Non hai SPID?</a>
+                </li>
+                <li class="spid-idp-support-link" data-spidlink="help">
+                    <a href="https://www.spid.gov.it/serve-aiuto">Serve aiuto?</a>
+                </li>
+            </ul>
+        </div>
+    </form>
+    <div class="col-lg-12" style="text-align: right; margin-bottom: 20px;">
+        <span>
+            <a style="cursor:pointer; margin-left: 30px;margin-bottom: 20px;" target="_new" href="https://www.dms.puglia.it/assets/documents/DMS_guida_operatori.pdf"><u>Cos'è SPID?</u></a>
+    </span></div>
+</div>
+<!-- FINE SPID -->                                
                                 <%} %>
                             </div>
                             <div class="form-group">
@@ -274,6 +325,9 @@
                                     if (idpAuthenticatorMapping != null) {
                                     for (Map.Entry<String, String> idpEntry : idpAuthenticatorMapping.entrySet()) {
                                         iconId++;
+                                        %>
+                                        <%=idpEntry.getKey() + " " + idpEntry.getValue() + "<br/>"%>
+                                        <% 
                                         if (!idpEntry.getKey().equals(Constants.RESIDENT_IDP_RESERVED_NAME)) {
                                             String idpName = idpEntry.getKey();
                                             boolean isHubIdp = false;
@@ -291,23 +345,6 @@
                                          title="<%=AuthenticationEndpointUtil.i18n(resourceBundle,"sign.in.with")%>
                                          <%=Encode.forHtmlAttribute(idpName)%>"/>
 
-                                    <div id="popover-head" class="hide">
-                                        <label class="font-large"><%=AuthenticationEndpointUtil.i18n(resourceBundle,"sign.in.with")%>
-                                            <%=Encode.forHtmlContent(idpName)%></label>
-                                    </div>
-                                    <div id="popover-content" class="hide">
-                                        <form class="form-inline">
-                                            <div class="form-group">
-                                                <input id="domainName" class="form-control" type="text"
-                                                       placeholder="<%=AuthenticationEndpointUtil.i18n(resourceBundle,
-                                                       "domain.name")%>">
-                                            </div>
-                                            <input type="button" class="btn btn-primary go-btn"
-                                                   onClick="javascript: myFunction('<%=idpName%>','<%=idpEntry.getValue()%>','domainName')"
-                                                   value="<%=AuthenticationEndpointUtil.i18n(resourceBundle,"go")%>"/>
-                                        </form>
-
-                                    </div>
                                 </a>
                                     <label for="icon-<%=iconId%>"><%=Encode.forHtmlContent(idpName)%></label>
                                 </div>
@@ -395,19 +432,35 @@
 
     <!-- footer -->
     <footer class="footer">
-        <div class="container-fluid">
-            <p><%=AuthenticationEndpointUtil.i18n(resourceBundle, "wso2.identity.server")%> | &copy;
-                <script>document.write(new Date().getFullYear());</script>
-                <a href="http://wso2.com/" target="_blank"><i class="icon fw fw-wso2"></i>
-                    <%=AuthenticationEndpointUtil.i18n(resourceBundle, "inc")%>
-                </a>. <%=AuthenticationEndpointUtil.i18n(resourceBundle, "all.rights.reserved")%>
-            </p>
+        <div class="row">
+        	<div class="col-.g-1">
+        	</div>
         </div>
     </footer>
 
     <script src="libs/jquery_1.11.3/jquery-1.11.3.js"></script>
     <script src="libs/bootstrap_3.3.5/js/bootstrap.min.js"></script>
-
+<!-- SPID -->
+<script type="text/javascript" src="js/spid-sp-access-button.min.js"></script>
+<script>
+$(document).ready(function(){
+    var rootList = $("#spid-idp-list-large-root-post");
+    var idpList = rootList.children(".spid-idp-button-link");
+    var lnkList = rootList.children(".spid-idp-support-link");
+    while (idpList.length) {
+        rootList.append(idpList.splice(Math.floor(Math.random() * idpList.length), 1)[0]);
+    }
+    rootList.append(lnkList);
+});
+$("#spid_idp_access").submit(function (e){
+	return false;
+});
+$("#spid_idp_access button").click(function(e){
+	handleNoDomain($(this).attr("name"), 'SAMLSSOAuthenticator');
+	return false;
+});
+</script>
+<!-- FINE SPID -->
     <script>
         $(document).ready(function () {
             $('.main-link').click(function () {
