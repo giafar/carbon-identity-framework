@@ -263,7 +263,10 @@
                             %>
                             <div class="form-group">
                                 <% if (hasLocalLoginOptions) { %>
-<!-- SPID -->   
+                                <%} %>
+                            </div>
+                            <div class="form-group">
+                            <!-- SPID SAML -->
 <div style="width:100%">
 <form name="spid_idp_access"  id="spid_idp_access" action="#" method="post" >
         <a href="#" class="italia-it-button italia-it-button-size-l button-spid" spid-idp-button="#spid-idp-button-large-post" aria-haspopup="true" aria-expanded="false">
@@ -272,33 +275,31 @@
         </a>
         <div id="spid-idp-button-large-post" class="spid-idp-button spid-idp-button-tip spid-idp-button-relative">
             <ul id="spid-idp-list-large-root-post" class="spid-idp-button-menu" aria-labelledby="spid-idp">
-                <li class="spid-idp-button-link" data-idp="arubaid">
-                    <button class="idp-button-idp-logo" name="aruba_id" type="submit"><span class="spid-sr-only">Aruba ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-arubaid.svg" onerror="this.src='images/spid/spid-idp-arubaid.png'; this.onerror=null;" alt="Aruba ID" /></button>
-                </li>
-                <li class="spid-idp-button-link" data-idp="infocertid">
-                    <button class="idp-button-idp-logo" name="agid-idp" type="submit"><span class="spid-sr-only">Infocert ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-infocertid.svg" onerror="this.src='images/spid/spid-idp-infocertid.png'; this.onerror=null;" alt="Infocert ID" /></button>
-                </li>
-                <li class="spid-idp-button-link" data-idp="intesaid">
-                    <button class="idp-button-idp-logo" name="intesa_id" type="submit"><span class="spid-sr-only">Intesa ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-intesaid.svg" onerror="this.src='images/spid/spid-idp-intesaid.png'; this.onerror=null;" alt="Intesa ID" /></button>
-                </li>
-                <li class="spid-idp-button-link" data-idp="lepidaid">
-                    <button class="idp-button-idp-logo" name="lepida_id" type="submit"><span class="spid-sr-only">Lepida ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-lepidaid.svg" onerror="this.src='images/spid/spid-idp-lepidaid.png'; this.onerror=null;" alt="Lepida ID" /></button>
-                </li>
-                <li class="spid-idp-button-link" data-idp="namirialid">
-                    <button class="idp-button-idp-logo" name="namirial_id" type="submit"><span class="spid-sr-only">Namirial ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-namirialid.svg" onerror="this.src='images/spid/spid-idp-namirialid.png'; this.onerror=null;" alt="Namirial ID" /></button>
-                </li>
-                <li class="spid-idp-button-link" data-idp="posteid">
-                    <button class="idp-button-idp-logo" name="poste_id" type="submit"><span class="spid-sr-only">Poste ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-posteid.svg" onerror="this.src='images/spid/spid-idp-posteid.png'; this.onerror=null;" alt="Poste ID" /></button>
-                </li>
-                <li class="spid-idp-button-link" data-idp="sielteid">
-                    <button class="idp-button-idp-logo" name="sielte_id" type="submit"><span class="spid-sr-only">Sielte ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-sielteid.svg" onerror="this.src='images/spid/spid-idp-sielteid.png'; this.onerror=null;" alt="Sielte ID" /></button>
-                </li>
-                <li class="spid-idp-button-link" data-idp="spiditalia">
-                    <button class="idp-button-idp-logo" name="spiditalia_id" type="submit"><span class="spid-sr-only">SPIDItalia Register.it</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-spiditalia.svg" onerror="this.src='images/spid/spid-idp-spiditalia.png'; this.onerror=null;" alt="SpidItalia" /></button>
-                </li>
-                <li class="spid-idp-button-link" data-idp="timid">
-                    <button class="idp-button-idp-logo" name="tim_id" type="submit"><span class="spid-sr-only">Tim ID</span><img class="spid-idp-button-logo" src="images/spid/spid-idp-timid.svg" onerror="this.src='images/spid/spid-idp-timid.png'; this.onerror=null;" alt="Tim ID" /></button>
-                </li>
+                                <%
+                                    int iconId = 0;
+                                    if (idpAuthenticatorMapping != null) {
+                                    for (Map.Entry<String, String> idpEntry : idpAuthenticatorMapping.entrySet()) {
+                                        iconId++;
+                                        if (!idpEntry.getKey().equals(Constants.RESIDENT_IDP_RESERVED_NAME)) {
+                                            String idpName = idpEntry.getKey();
+                                            boolean isHubIdp = false;
+                                            if (idpName.endsWith(".hub")) {
+                                                isHubIdp = true;
+                                                idpName = idpName.substring(0, idpName.length() - 4);
+                                            }
+                                %>
+                                				<% if (isHubIdp) { %>
+                                				<!-- HUB RIMOSSO -->
+                                				<%} else { %>
+                                				<!-- SPID ENTRY -->
+                                <!-- BOTTONE SPID -->
+                                <li class="spid-idp-button-link" data-idp="<%=idpName%>">
+                    					<button class="idp-button-idp-logo" name="<%=idpName%>" type="submit"><span class="spid-sr-only"><%=idpName%></span>
+                    					<img class="spid-idp-button-logo" src="images/spid/spid-<%=idpName%>.svg" onerror="this.src='images/spid/spid-<%=idpName%>.png'; this.onerror=null;" alt="<%=idpName%>" /></button>
+                					</li>
+                                <!-- FINE BOTTONE SPID -->
+                                    	<!-- FINE SPID ENTRY -->
+                                <%} %>
                 <li class="spid-idp-support-link" data-spidlink="info">
                     <a href="https://www.spid.gov.it">Maggiori informazioni</a>
                 </li>
@@ -315,52 +316,7 @@
         <span>
             <a style="cursor:pointer; margin-left: 30px;margin-bottom: 20px;" target="_new" href="https://www.dms.puglia.it/assets/documents/DMS_guida_operatori.pdf"><u>Cos'è SPID?</u></a>
     </span></div>
-</div>
-<!-- FINE SPID -->                                
-                                <%} %>
-                            </div>
-                            <div class="form-group">
-                                <%
-                                    int iconId = 0;
-                                    if (idpAuthenticatorMapping != null) {
-                                    for (Map.Entry<String, String> idpEntry : idpAuthenticatorMapping.entrySet()) {
-                                        iconId++;
-                                        %>
-                                        <%=idpEntry.getKey() + " " + idpEntry.getValue() + "<br/>"%>
-                                        <% 
-                                        if (!idpEntry.getKey().equals(Constants.RESIDENT_IDP_RESERVED_NAME)) {
-                                            String idpName = idpEntry.getKey();
-                                            boolean isHubIdp = false;
-                                            if (idpName.endsWith(".hub")) {
-                                                isHubIdp = true;
-                                                idpName = idpName.substring(0, idpName.length() - 4);
-                                            }
-                                %>
-                                <% if (isHubIdp) { %>
-                                <div>
-                                <a href="#" data-toggle="popover" data-placement="bottom"
-                                   title="<%=AuthenticationEndpointUtil.i18n(resourceBundle,"sign.in.with")%>
-                                    <%=Encode.forHtmlAttribute(idpName)%>" id="popover" id="icon-<%=iconId%>">
-                                    <img class="idp-image" src="images/login-icon.png"
-                                         title="<%=AuthenticationEndpointUtil.i18n(resourceBundle,"sign.in.with")%>
-                                         <%=Encode.forHtmlAttribute(idpName)%>"/>
-
-                                </a>
-                                    <label for="icon-<%=iconId%>"><%=Encode.forHtmlContent(idpName)%></label>
-                                </div>
-                                <%} else { %>
-                                <div>
-                                <a onclick="javascript: handleNoDomain('<%=Encode.forJavaScriptAttribute(Encode.
-                                forUriComponent(idpName))%>',
-                                        '<%=Encode.forJavaScriptAttribute(Encode.forUriComponent(idpEntry.getValue()))%>')"
-                                   href="#" id="icon-<%=iconId%>">
-                                    <img class="idp-image" src="images/login-icon.png" data-toggle="tooltip"
-                                         data-placement="top" title="<%=AuthenticationEndpointUtil.i18n(resourceBundle,
-                                                       "sign.in.with")%> <%=Encode.forHtmlAttribute(idpName)%>"/>
-                                </a>
-                                <label for="icon-<%=iconId%>"><%=Encode.forHtmlContent(idpName)%></label>
-                                    </div>
-                                <%} %>
+                                	<!-- FINE SPID SAML  -->
                                 <%
                                 } else if (localAuthenticatorNames.size() > 0) {
                                     if (localAuthenticatorNames.contains(IWA_AUTHENTICATOR)) {
