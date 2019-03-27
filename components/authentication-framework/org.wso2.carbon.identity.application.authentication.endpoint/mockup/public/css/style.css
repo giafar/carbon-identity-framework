@@ -1,11 +1,19 @@
+/* bootstrap overrides */
+*, ::after, ::before {
+  /* -webkit-box-sizing: border-box; */
+  /* box-sizing: border-box; */
+  box-sizing: unset; 
+}
+
 /** BASE **/
-html,
-body {
-  height: 100%;
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
-  background-color: #fafafa; }
+  background-color: #fafafa;
+}
 
 .shadow-bo {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }
@@ -49,7 +57,8 @@ p.logo-header img {
     overflow-x: auto;
     overflow-y: hidden;
     flex-wrap: nowrap;
-    justify-content: unset !important; } }
+    justify-content: unset !important; } 
+}
 
 /** COMPONENTS **/
 .button-main {
@@ -59,27 +68,44 @@ p.logo-header img {
   font-size: 18px;
   height: 46px;
   padding: .375rem .5rem;
-  width: 100%; }
+  width: 100%; 
+}
+
+.button-center {
+  display: flex!important;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-login-w {
+  width: 100% !important;
+}
 
 .img-dropdown-icon {
   height: 30px;
   margin: 10px 0;
-  border: 0; }
+  border: 0; 
+}
 
 .header-logo-login {
   margin-top: 60px;
-  margin-bottom: 60px; }
+  margin-bottom: 60px; 
+}
 
 .login-bo-container {
-  max-width: 848px;
-  margin: 0 auto; }
+  max-width: 1040px;
+  margin: 0 auto; 
+}
 
 .border-description-styled {
   border-left: 3px solid #0060BF;
-  padding: 15px; }
+  padding: 15px; 
+}
 
 .tab-width {
-  width: 212px; }
+  width: 212px; 
+}
 
 .margin-bottom-section {
-  margin-bottom: 65px; }
+  margin-bottom: 65px; 
+}
