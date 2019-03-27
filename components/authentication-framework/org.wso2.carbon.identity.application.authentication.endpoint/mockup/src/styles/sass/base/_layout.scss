@@ -1,0 +1,47 @@
+.shadow-bo {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.main-box-bo {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  min-height: 740px;
+}
+
+.img-dropdown-icon {
+  height: 20px;
+  margin: 10px 0;
+  border: 0;
+}
+
+p.logo-header img {
+  height: 130px;
+}
+
+.white {
+  background-color: #fff;
+}
+
+.danger-light {
+  color: #f73e5a;
+  font-weight: 500;
+}
+
+.danger-dark {
+  color: #f73e5a;
+  font-weight: 600;
+}
+
+.error-feedback {
+  border-bottom: 1px solid #d9364f;
+}
+
+/* media */
+@media (max-width: 992px) {
+  .scrollbar .nav-tabs {
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    justify-content: unset !important;
+  }
+}
