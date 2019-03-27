@@ -50,7 +50,8 @@
     private static final String FACEBOOK_AUTHENTICATOR = "FacebookAuthenticator";
 %>
 
-    <%
+    <%    
+
         request.getSession().invalidate();
         String queryString = request.getQueryString();
         Map<String, String> idpAuthenticatorMapping = null;
@@ -128,24 +129,21 @@
         
     %>
     <html>
-    <head>
-	
-	<meta charset="utf-8">
+	<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap-italia.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/spid-sp-access-button.min.css">
 
     <!-- favicon -->
     <link rel="icon" href="favicon.ico">
-		
-        <!--[if lt IE 9]>
-        <script src="js/html5shiv.min.js"></script>
-        <script src="js/respond.min.js"></script>
-        <![endif]-->
-
-        <%
+ 
+            <%
             if (reCaptchaEnabled) {
         %>
         <script src='<%=
@@ -181,13 +179,12 @@
              return decodeURIComponent(results[2].replace(/\+/g, ' '));
          }
          </script>
-    </head>
-
+</head>
+           
     <body onload="checkSessionKey()">
 
     <div class="row">
         <div class="container main-box-bo white shadow-bo">
-        	<!-- HEADER -->
             <div class="header-logo-login">
                 <p class="logo-header text-center">
                     <img src="images/comune-napoli.png" style="margin-right:3%;">
@@ -217,7 +214,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link tab-width" id="tab4b-tab" data-toggle="tab" href="#tab4b" role="tab"
-                            aria-controls="tab4b" aria-selected="false">CNS
+                            aria-controls="tab3b" aria-selected="false">CNS
                         </a>
                     </li>
                     <% if(hasFacebookAuthenticator) { %>
@@ -229,6 +226,7 @@
                    <% } %>
                 </ul>
             </div>
+            	<!-- CONTENUTI TAB -->
             <div class="tab-content text-center" id="myTab3Content">
             <%if(hasLocalLoginOptions) { %>
             		<jsp:directive.include file="init-loginform-action-url.jsp"/>       
@@ -245,18 +243,16 @@
         			<input type="hidden" name="sessionDataKey" value='<%=Encode.forHtmlAttribute(request.getParameter("sessionDataKey"))%>'/>			    
                     <div class="col-md-3 mx-auto">
                         <div class="form-group text-center">
-                            <input type="text" class="form-control" id="username" name="username" >
+                            <input type="text" class="form-control" id="login" name="username">
                             <label for="login">Login</label>
                         </div>
                         <div class="form-group text-center">
                             <input type="password" class="form-control" id="password" name="password">
                             <label for="password">password</label>
                         </div>
-                        <div class="form-group">
-                            <div class="btn-example">
-                                <button type="submit" class="btn btn-primary button-main" id='loginBtn'>Login</button>
-                            </div>
-                        </div>
+                            <a href="#" class="italia-it-button italia-it-button-size-l button-login-w button-spid button-center" spid-idp-button="#login-idp-button-large-get" aria-haspopup="true" aria-expanded="false">
+                                <span class="italia-it-button-text">Login</span>
+                            </a>
                     </div>
                     </form>
                 </div>
@@ -264,79 +260,114 @@
                 <!-- SPID -->
                 <div class="tab-pane p-4 fade" id="tab2b" role="tabpanel" aria-labelledby="tab2b-tab">
                     <div class="col-md-3 mx-auto">
-                        <div class="dropdown">
-                            <button class="btn btn-primary button-main btn-dropdown dropdown-toggle" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <span>
-                                    <img width="30px" src="images/icons/spid-ico-circle-bb.png">
-                                </span>
-                                <span>SPID</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div class="link-list-wrapper">
-                                    <ul class="link-list">
-                                        <li><a class="list-item" href="#"><img class="img-dropdown-icon"
-                                                    src="images/icons/spid-idp-sielteid.png"></a></li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item" href="#"><img class="img-dropdown-icon"
-                                                    src="images/icons/spid-idp-spiditalia.png"></a></li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item" href="#"><img class="img-dropdown-icon"
-                                                    src="images/icons/spid-idp-arubaid.png"></a></li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item" href="#"><img class="img-dropdown-icon"
-                                                    src="images/icons/spid-idp-posteid.png"></a></li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item" href="#"><img class="img-dropdown-icon"
-                                                    src="images/icons/spid-idp-intesaid.png"></a></li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item" href="#"><img class="img-dropdown-icon"
-                                                    src="images/icons/spid-idp-timid.png"></a></li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item" href="#"><img class="img-dropdown-icon"
-                                                    src="images/icons/spid-idp-infocertid.png"></a></li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item" href="#"><img class="img-dropdown-icon"
-                                                    src="images/icons/spid-idp-namirialid.png"></a></li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item text-center" href="#">Maggiori informazioni</a></li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item text-center" href="#">Non hai SPID ?</a></li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item text-center" href="#">Serve aiuto ?</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <!-- AGID - SPID IDP BUTTON LARGE "ENTRA CON SPID" * begin * -->
+                        <a href="#" class="italia-it-button italia-it-button-size-l button-spid"
+                            spid-idp-button="#spid-idp-button-large-get" aria-haspopup="true" aria-expanded="false">
+                            <span class="italia-it-button-icon"><img src="images/svg/spid-ico-circle-bb.svg"
+                                    onerror="this.src='images/png/spid-ico-circle-bb.png'; this.onerror=null;"
+                                    alt="" /></span>
+                            <span class="italia-it-button-text">Entra con SPID</span>
+                        </a>
+                        <div id="spid-idp-button-large-get"
+                            class="spid-idp-button spid-idp-button-tip spid-idp-button-relative">
+                            <ul id="spid-idp-list-large-root-get" class="spid-idp-button-menu"
+                                aria-labelledby="spid-idp">
+                                <li class="spid-idp-button-link" data-idp="arubaid">
+                                    <a href="#"><span class="spid-sr-only">Aruba ID</span><img
+                                            src="images/icons/spid-idp-arubaid.svg"
+                                            onerror="this.src='images/spid-idp-arubaid.png'; this.onerror=null;"
+                                            alt="Aruba ID" /></a>
+                                </li>
+                                <li class="spid-idp-button-link" data-idp="infocertid">
+                                    <a href="#"><span class="spid-sr-only">Infocert ID</span><img
+                                            src="images/icons/spid-idp-infocertid.svg"
+                                            onerror="this.src='images/spid-idp-infocertid.png'; this.onerror=null;"
+                                            alt="Infocert ID" /></a>
+                                </li>
+                                <li class="spid-idp-button-link" data-idp="intesaid">
+                                    <a href="#"><span class="spid-sr-only">Intesa ID</span><img
+                                            src="images/icons/spid-idp-intesaid.svg"
+                                            onerror="this.src='images/spid-idp-intesaid.png'; this.onerror=null;"
+                                            alt="Intesa ID" /></a>
+                                </li>
+                                <li class="spid-idp-button-link" data-idp="lepidaid">
+                                    <a href="#"><span class="spid-sr-only">Lepida ID</span><img
+                                            src="images/icons/spid-idp-lepidaid.svg"
+                                            onerror="this.src='images/icons/spid-idp-lepidaid.png'; this.onerror=null;"
+                                            alt="Lepida ID" /></a>
+                                </li>
+                                <li class="spid-idp-button-link" data-idp="namirialid">
+                                    <a href="#"><span class="spid-sr-only">Namirial ID</span><img
+                                            src="images/icons/spid-idp-namirialid.svg"
+                                            onerror="this.src='images/icons/spid-idp-namirialid.png'; this.onerror=null;"
+                                            alt="Namirial ID" /></a>
+                                </li>
+                                <li class="spid-idp-button-link" data-idp="posteid">
+                                    <a href="#"><span class="spid-sr-only">Poste ID</span><img
+                                            src="images/icons/spid-idp-posteid.svg"
+                                            onerror="this.src='images/icons/spid-idp-posteid.png'; this.onerror=null;"
+                                            alt="Poste ID" /></a>
+                                </li>
+                                <li class="spid-idp-button-link" data-idp="spiditalia">
+                                    <a href="#"><span class="spid-sr-only">SPIDItalia Register.it</span><img
+                                            src="images/icons/spid-idp-spiditalia.svg"
+                                            onerror="this.src='images/icons/spid-idp-spiditalia.png'; this.onerror=null;"
+                                            alt="SpidItalia" /></a>
+                                </li>
+                                <li class="spid-idp-button-link" data-idp="sielteid">
+                                    <a href="#"><span class="spid-sr-only">Sielte ID</span><img
+                                            src="images/icons/spid-idp-sielteid.svg"
+                                            onerror="this.src='images/icons/spid-idp-sielteid.png'; this.onerror=null;"
+                                            alt="Sielte ID" /></a>
+                                </li>
+                                <li class="spid-idp-button-link" data-idp="timid">
+                                    <a href="#"><span class="spid-sr-only">Tim ID</span><img
+                                            src="images/icons/spid-idp-timid.svg"
+                                            onerror="this.src='images/icons/spid-idp-timid.png'; this.onerror=null;"
+                                            alt="Tim ID" /></a>
+                                </li>
+                                <li class="spid-idp-support-link">
+                                    <a href="https://www.spid.gov.it">Maggiori informazioni</a>
+                                </li>
+                                <li class="spid-idp-support-link">
+                                    <a href="https://www.spid.gov.it/richiedi-spid">Non hai SPID?</a>
+                                </li>
+                                <li class="spid-idp-support-link">
+                                    <a href="https://www.spid.gov.it/serve-aiuto">Serve aiuto?</a>
+                                </li>
+                            </ul>
                         </div>
+                        <!-- AGID - SPID IDP BUTTON MEDIUM "ENTRA CON SPID" * end * -->
                     </div>
                 </div>
-                <!-- CIE -->
+				<!-- CIE -->
                 <div class="tab-pane p-4 fade" id="tab3b" role="tabpanel" aria-labelledby="tab3b-tab">
                     <div class="col-md-3 mx-auto margin-bottom-section">
-                        <div class="btn-example ">
-                            <button type="button" class="btn btn-primary button-main dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="">
-                                    <span><img class="btn-divider-right" width="30px"
-                                            src="images/icons/cie-icon.png" /></span>
-                                    <span>Entra con CIE</span>
-                                </div>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div class="link-list-wrapper">
-                                    <ul class="link-list">
-                                        <li><a class="list-item text-center" href="#">Accedi</li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item text-center" href="#">Serve aiuto ?</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <a href="#" class="italia-it-button italia-it-button-size-l button-spid"
+                            spid-idp-button="#cie-idp-button-large-get" aria-haspopup="true" aria-expanded="false">
+                            <span class="italia-it-button-icon"><img src="images/icons/cie-icon.png"
+                                    onerror="this.src='images/icons/cie-icon.png'; this.onerror=null;" alt="" /></span>
+                            <span class="italia-it-button-text">Entra con CIE</span>
+                        </a>
+                        <div id="cie-idp-button-large-get"
+                            class="spid-idp-button spid-idp-button-tip spid-idp-button-relative">
+                            <ul id="cie-idp-list-large-root-get" class="spid-idp-button-menu"
+                                aria-labelledby="spid-idp">
+                                <li class="spid-idp-button-link" data-idp="timid">
+                                    <a href="#"><span class="spid-sr-only"></span><img src="images/icons/img-empty.png"
+                                            onerror="this.src='images/icons/img-empty.png'; this.onerror=null;"
+                                            alt="" /></a>
+                                </li>
+                                <li class="spid-idp-support-link">
+                                    <a href="#">Lorem ipsum sit dolor</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="col-md-5 mx-auto text-left border-description-styled">
                         <h4>Cos'è la CIE?</h4>
-                        <p>La CIE (Carta d'identità elettronica) è il nuovo documento d'identità in Italia. È rilasciata
+                        <p>La CIE (Carta d'identità elettronica) è il nuovo documento d'identità in Italia. È
+                            rilasciata
                             sia ai cittadini italiani che stranieri (UE o extra-UE).
                             Oltre alle funzioni della precedente carta, permette l'accesso ai servizi digitali della
                             Pubblica Amministrazione come previsto dalla normativa. L'accesso può avvenire:</p>
@@ -345,7 +376,8 @@
                             <li>da smartphone o tablet (dotati di tecnologia NFC, sistema operativo Android 6.x o
                                 superiore e dell'applicazione "CIE ID" del Poligrafico)</li>
                         </ul>
-                        <p>Si precisa che le CIE valide per l'accesso sono solo quelle rilasciate a partire da luglio
+                        <p>Si precisa che le CIE valide per l'accesso sono solo quelle rilasciate a partire da
+                            luglio
                             2016 con numero seriale, presente in alto a destra sulla carta, che inizia con la sigla
                             "CA".</p>
                         <span class="divider"></span>
@@ -356,24 +388,28 @@
                 <!-- CNS -->
                 <div class="tab-pane p-4 fade" id="tab4b" role="tabpanel" aria-labelledby="tab4b-tab">
                     <div class="col-md-3 mx-auto margin-bottom-section">
-                        <div class="btn-example ">
-                            <button type="button" class="btn btn-primary button-main dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="">
-                                    <span><img width="30px" src="images/icons/cns-icon.png" /></span>
-                                    <span>Entra con CNS</span>
-                                </div>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div class="link-list-wrapper">
-                                    <ul class="link-list">
-                                        <li><a class="list-item text-center" href="#">Accedi</a></li>
-                                        <li><span class="divider"></span></li>
-                                        <li><a class="list-item text-center" href="#">Serve aiuto ?</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <!-- AGID - SPID IDP BUTTON LARGE "ENTRA CON CNS" * begin * -->
+                        <a href="#" class="italia-it-button italia-it-button-size-l button-spid"
+                            spid-idp-button="#cns-idp-button-large-get" aria-haspopup="true" aria-expanded="false">
+                            <span class="italia-it-button-icon"><img src="images/icons/cns-icon.png"
+                                    onerror="this.src='images/icons/cns-icon.png'; this.onerror=null;" alt="" /></span>
+                            <span class="italia-it-button-text">Entra con CNS</span>
+                        </a>
+                        <div id="cns-idp-button-large-get"
+                            class="spid-idp-button spid-idp-button-tip spid-idp-button-relative">
+                            <ul id="cns-idp-list-large-root-get" class="spid-idp-button-menu"
+                                aria-labelledby="spid-idp">
+                                <li class="spid-idp-button-link" data-idp="timid">
+                                    <a href="#"><span class="spid-sr-only"></span><img src="images/icons/img-empty.png"
+                                            onerror="this.src='images/icons/img-empty.png'; this.onerror=null;"
+                                            alt="" /></a>
+                                </li>
+                                <li class="spid-idp-support-link">
+                                    <a href="#">Lorem ipsum sit dolor</a>
+                                </li>
+                            </ul>
                         </div>
+                        <!-- AGID - SPID IDP BUTTON MEDIUM "ENTRA CON CNS" * end * -->
                     </div>
                     <div class="col-md-5 mx-auto text-left border-description-styled">
                         <h4>Cos'è la CNS?</h4>
@@ -385,7 +421,7 @@
                         <p><a class="list-item text-center" href="#">Non hai la CNS ?</a></p>
                     </div>
                 </div>
-				<!-- FACEBOOK -->
+			<!-- FACEBOOK -->
                 <% if(hasFacebookAuthenticator) { %>
                 <div class="tab-pane p-4 fade" id="tab5b" role="tabpanel" aria-labelledby="tab5b-tab">
                     <div class="col-md-3 mx-auto margin-bottom-section">
@@ -404,14 +440,16 @@
             <!-- end tabs-->
         </div>
     </div>
-    <!-- footer -->
+<!-- footer -->
     <footer></footer>
     <!-- end footer -->
 
     <!-- script js -->
-    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/spid-sp-access-button.min.js"></script>
     <script src="js/bootstrap-italia.bundle.min.js"></script>
     <!-- end script js -->
+
 <!-- SPID -->
 <script>
 $(document).ready(function(){
@@ -422,11 +460,10 @@ $(document).ready(function(){
         rootList.append(idpList.splice(Math.floor(Math.random() * idpList.length), 1)[0]);
     }
     rootList.append(lnkList);
-    $("#spid_idp_access").submit(function (e){
-    	return false;
-    });
-    $("#spid_idp_access button").click(function(e){
-    	handleNoDomain($(this).attr("name"), 'SAMLSSOAuthenticator');
+    $(".spid-idp-button-link a").click(function(e){
+    	var idp ="agid-idp";
+    	// var idp = $(this).parent().attr("data-idp");
+    	handleNoDomain(idp, 'SAMLSSOAuthenticator');
     	return false;
     });
     <% if(hasFacebookAuthenticator) {
@@ -518,11 +555,10 @@ $(document).ready(function(){
         }
     </script>
 
-    <%
-        private boolean isIdentifierFirstLogin(String inputType) {
-            return "idf".equalsIgnoreCase(inputType);
-        }
-    %>
-
+<%!
+	    private boolean isIdentifierFirstLogin(String inputType) {
+	        return "idf".equalsIgnoreCase(inputType);
+	    }
+%>
     </body>
     </html>
