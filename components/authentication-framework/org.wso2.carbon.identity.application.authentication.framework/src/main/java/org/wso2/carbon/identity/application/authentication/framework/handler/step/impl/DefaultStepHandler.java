@@ -63,6 +63,8 @@ public class DefaultStepHandler implements StepHandler {
     private static volatile DefaultStepHandler instance;
     private static String RE_CAPTCHA_USER_DOMAIN = "user-domain-recaptcha";
 
+    private static final String REQUEST_ATTRIBUTE_ERROR_MESSAGE_HOLDER = "indra.request.error.holder";
+    
     public static DefaultStepHandler getInstance() {
 
         if (instance == null) {
@@ -280,6 +282,9 @@ public class DefaultStepHandler implements StepHandler {
                     if (stepConfig.isRetrying()) {
                         context.setCurrentAuthenticator(null);
                         retryParam = "&authFailure=true&authFailureMsg=login.fail.message";
+                        if(request.getAttribute(REQUEST_ATTRIBUTE_ERROR_MESSAGE_HOLDER) != null) {
+                        	  retryParam += String.format("&authErrorDetail=%s", request.getAttribute(REQUEST_ATTRIBUTE_ERROR_MESSAGE_HOLDER));
+                        }
                     }
 
                     try {
@@ -559,6 +564,8 @@ public class DefaultStepHandler implements StepHandler {
             handleFailedAuthentication(request, response, context, authenticatorConfig, e.getUser());
         } catch (AuthenticationFailedException e) {
             log.error(e.getMessage(), e);
+            // Set the exception message in a request parameter
+            request.setAttribute(REQUEST_ATTRIBUTE_ERROR_MESSAGE_HOLDER, e.getMessage());
             handleFailedAuthentication(request, response, context, authenticatorConfig, e.getUser());
         } catch (LogoutFailedException e) {
             throw new FrameworkException(e.getMessage(), e);

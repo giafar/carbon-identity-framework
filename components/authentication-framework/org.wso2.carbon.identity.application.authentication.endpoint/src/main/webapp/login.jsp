@@ -46,6 +46,7 @@
     private static final String BASIC_AUTHENTICATOR = "BasicAuthenticator";
     private static final String IDENTIFIER_EXECUTOR = "IdentifierExecutor";
     private static final String OPEN_ID_AUTHENTICATOR = "OpenIDAuthenticator";
+    private static final String X509_AUTHENTICATOR = "x509CertificateAuthenticator";
     private static final String JWT_BASIC_AUTHENTICATOR = "JWTBasicAuthenticator";
     private static final String FACEBOOK_AUTHENTICATOR = "FacebookAuthenticator";
 %>
@@ -76,7 +77,10 @@
 
         boolean hasLocalLoginOptions = false;
         boolean hasFacebookAuthenticator = false;
+        boolean hasX509Authenticator = false;
         boolean isBackChannelBasicAuth = false;
+        boolean isAuthFailed = request.getParameter("authErrorDetail") != null;
+        
         List<String> localAuthenticatorNames = new ArrayList<String>();
 
         if (idpAuthenticatorMapping != null && idpAuthenticatorMapping.get(Constants.RESIDENT_IDP_RESERVED_NAME) != null) {
@@ -101,6 +105,9 @@
     			hasLocalLoginOptions = true;
     		} else if (localAuthenticatorNames.contains(JWT_BASIC_AUTHENTICATOR) || localAuthenticatorNames.contains(BASIC_AUTHENTICATOR)) {
                 hasLocalLoginOptions = true;
+    		}
+ 		    	if (localAuthenticatorNames.contains(X509_AUTHENTICATOR)) {    		
+    			hasX509Authenticator = true;
     		}
     	}
         
@@ -191,9 +198,20 @@
                     <img src="images/ponmetro.png">
                 </p>
             </div>
-            <h2 class="u-text-h2 text-center margin-bottom-section">Accedi con le tue credenziali</h2>
+            <h2 class="u-text-h2 text-center margin-bottom-section"><%=request.getParameter("sp") %> - Accedi con le tue credenziali</h2>
             <!-- tabs -->
             <div class="scrollbar login-bo-container margin-bottom-section">
+            		<% if (isAuthFailed) {
+            			String spidErrorCode =  request.getParameter("authErrorDetail");
+            			String spidErrorMessage = "Errore generico: " + spidErrorCode;
+            			// https://www.agid.gov.it/sites/default/files/repository_files/regole_tecniche/spid_tabella_messaggi_di_anomalia_v1.0.pdf
+            			if("ErrorCode nr22".equals(spidErrorCode)) {
+            				spidErrorMessage = "Non è possibile accedere al servizio poiché non è stato dato il consenso all'invio dei dati personali";
+            			}	
+            		%>
+            		<h4 class="u-text-h2 danger-light text-left">Si &egrave; verificato il seguente errore:</h4>
+            		<h4 class="u-text-h2 margin-bottom-section text-left danger-dark"><%= spidErrorMessage %></h4>            		
+            		<% } %>
                 <ul class="nav nav-tabs mb-3 justify-content-center" id="myTab3" role="tablist">
                 <% if (hasLocalLoginOptions) { %>
                     <li class="nav-item">
@@ -207,6 +225,7 @@
                             aria-controls="tab2b" aria-selected="false">SPID
                         </a>
                     </li>
+                    <% if(hasX509Authenticator ) { %>
                     <li class="nav-item">
                         <a class="nav-link tab-width" id="tab3b-tab" data-toggle="tab" href="#tab3b" role="tab"
                             aria-controls="tab3b" aria-selected="false">CIE
@@ -217,6 +236,7 @@
                             aria-controls="tab3b" aria-selected="false">CNS
                         </a>
                     </li>
+                   <% } %>
                     <% if(hasFacebookAuthenticator) { %>
                     <li class="nav-item">
                         <a class="nav-link tab-width" id="tab5b-tab" data-toggle="tab" href="#tab5b" role="tab"
@@ -341,6 +361,7 @@
                     </div>
                 </div>
 				<!-- CIE -->
+                <% if(hasX509Authenticator ) { %>
                 <div class="tab-pane p-4 fade" id="tab3b" role="tabpanel" aria-labelledby="tab3b-tab">
                     <div class="col-md-3 mx-auto margin-bottom-section">
                         <a href="#" class="italia-it-button italia-it-button-size-l button-spid"
@@ -421,6 +442,7 @@
                         <p><a class="list-item text-center" href="#">Non hai la CNS ?</a></p>
                     </div>
                 </div>
+				<% } %>
 			<!-- FACEBOOK -->
                 <% if(hasFacebookAuthenticator) { %>
                 <div class="tab-pane p-4 fade" id="tab5b" role="tabpanel" aria-labelledby="tab5b-tab">
