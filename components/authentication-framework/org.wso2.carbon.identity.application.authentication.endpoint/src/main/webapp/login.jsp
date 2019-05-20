@@ -365,7 +365,7 @@
                 <div class="tab-pane p-4 fade" id="tab3b" role="tabpanel" aria-labelledby="tab3b-tab">
                     <div class="col-md-3 mx-auto margin-bottom-section">
                         <a href="#" class="italia-it-button italia-it-button-size-l button-spid"
-                            spid-idp-button="#cie-idp-button-large-get" aria-haspopup="true" aria-expanded="false">
+                            spid-idp-button="#cie-idp-button-large-get" aria-haspopup="true" aria-expanded="false" onclick="handleNoDomain('', 'x509CertificateAuthenticator');">
                             <span class="italia-it-button-icon"><img src="images/icons/cie-icon.png"
                                     onerror="this.src='images/icons/cie-icon.png'; this.onerror=null;" alt="" /></span>
                             <span class="italia-it-button-text">Entra con CIE</span>
@@ -411,7 +411,7 @@
                     <div class="col-md-3 mx-auto margin-bottom-section">
                         <!-- AGID - SPID IDP BUTTON LARGE "ENTRA CON CNS" * begin * -->
                         <a href="#" class="italia-it-button italia-it-button-size-l button-spid"
-                            spid-idp-button="#cns-idp-button-large-get" aria-haspopup="true" aria-expanded="false">
+                            spid-idp-button="#cns-idp-button-large-get" aria-haspopup="true" aria-expanded="false" onclick="handleNoDomain('', 'x509CertificateAuthenticator');">
                             <span class="italia-it-button-icon"><img src="images/icons/cns-icon.png"
                                     onerror="this.src='images/icons/cns-icon.png'; this.onerror=null;" alt="" /></span>
                             <span class="italia-it-button-text">Entra con CNS</span>

@@ -290,7 +290,7 @@ public class DefaultAuthenticationRequestHandler implements AuthenticationReques
                 if (StringUtils.isNotEmpty(userTenantDomain)) {
                     if (StringUtils.isNotEmpty(spTenantDomain) && !spTenantDomain.equals
                             (userTenantDomain)) {
-                        throw new FrameworkException("Service Provider tenant domain must be equal to user tenant " +
+                        throw new FrameworkException("Service Provider tenant domain "+spTenantDomain+"must be equal to user tenant " + userTenantDomain + 
                                 "domain for non-SaaS applications");
                     }
                 }

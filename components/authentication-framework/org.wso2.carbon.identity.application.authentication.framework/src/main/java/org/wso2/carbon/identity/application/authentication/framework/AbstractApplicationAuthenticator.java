@@ -81,8 +81,8 @@ public abstract class AbstractApplicationAuthenticator implements ApplicationAut
                             String tenantDomain = context.getTenantDomain();
                             if (!StringUtils.equals(userDomain, tenantDomain)) {
                                 context.setProperty("UserTenantDomainMismatch", true);
-                                throw new AuthenticationFailedException("Service Provider tenant domain must be " +
-                                        "equal to user tenant domain for non-SaaS applications", context.getSubject());
+                                throw new AuthenticationFailedException("Service Provider tenant domain " + tenantDomain +" must be " +
+                                        " equal to user tenant domain " + userDomain + "for non-SaaS applications", context.getSubject());
                             }
                         }
                     }
